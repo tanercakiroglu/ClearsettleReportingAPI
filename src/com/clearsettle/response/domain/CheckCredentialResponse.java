@@ -2,8 +2,21 @@ package com.clearsettle.response.domain;
 
 public class CheckCredentialResponse  extends BaseResponse{
 
-	public CheckCredentialResponse(String status) {
+	private String token;
+
+	public CheckCredentialResponse(String status, String token) {
 		super(status);
-	 }
+		this.token = token;
+	}
+
+	public String getToken() {
+		return token;
+	}
+
+	public void setToken(String token) {
+		this.token = token;
+	}
+	
+
 
 }
