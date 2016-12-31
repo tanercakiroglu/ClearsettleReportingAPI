@@ -3,11 +3,12 @@
 <configuration>
 
 	<property name="DEV_HOME" value="c:/logs" />
-	
+
 	<appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
 		<layout class="ch.qos.logback.classic.PatternLayout">
 			<Pattern>
-				%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n
+				%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} -
+				%msg%n
 			</Pattern>
 		</layout>
 	</appender>
@@ -27,7 +28,8 @@
 
 				<encoder class="ch.qos.logback.classic.encoder.PatternLayoutEncoder">
 					<Pattern>
-						%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger{35} - %msg%n
+						%d{yyyy-MM-dd HH:mm:ss} [%thread] %level %logger{35} -
+						%msg%n
 					</Pattern>
 				</encoder>
 
@@ -49,7 +51,13 @@
 		</sift>
 	</appender>
 
-	<logger name="com.chrental.aspect.logger" level="debug" additivity="false">
+	<logger name="com.clearsettle.configuration" level="debug"
+		additivity="false">
+		<appender-ref ref="STDOUT" />
+	</logger>
+
+	<logger name="com.clearsettle.aspect.logger" level="debug"
+		additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
 
@@ -57,10 +65,11 @@
 		<appender-ref ref="STDOUT" />
 	</logger>
 
-	<logger name="com.chrental.controller" level="debug" additivity="false">
+	<logger name="com.clearsettle.controller" level="debug"
+		additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>
-	
+
 	<logger name="org.codehaus.jackson" level="debug" additivity="false">
 		<appender-ref ref="STDOUT" />
 	</logger>

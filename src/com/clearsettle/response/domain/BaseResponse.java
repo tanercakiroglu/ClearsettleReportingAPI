@@ -5,6 +5,7 @@ public abstract class BaseResponse {
 	private String status;
 	
 	
+	public BaseResponse(){};
 
 	public BaseResponse(String status) {
 		this.status = status;
