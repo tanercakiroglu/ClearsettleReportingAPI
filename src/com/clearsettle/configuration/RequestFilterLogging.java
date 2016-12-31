@@ -1,8 +1,10 @@
 package com.clearsettle.configuration;
 
-import java.io.ByteArrayOutputStream;
+import java.io.BufferedReader;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.concurrent.atomic.AtomicLong;
 
 import javax.servlet.Filter;
@@ -16,15 +18,14 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletRequestWrapper;
 import javax.servlet.http.HttpSession;
 
-import org.apache.commons.io.input.TeeInputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 public class RequestFilterLogging implements Filter {
 
-	private AtomicLong id = new AtomicLong(1);
+	private AtomicLong atomicId = new AtomicLong(1);
 	private static final String REQUEST_PREFIX = "Request: ";
-	 private final static Logger logger = LoggerFactory.getLogger(RequestFilterLogging.class);
+	private final static Logger logger = LoggerFactory.getLogger(RequestFilterLogging.class);
 
 	@Override
 	public void destroy() {
@@ -36,14 +37,13 @@ public class RequestFilterLogging implements Filter {
 	public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain)
 			throws IOException, ServletException {
 
-		HttpServletRequest req = (HttpServletRequest) request;
+		long requestId = atomicId.incrementAndGet();
+		MyRequestWrapper myRequestWrapper = new MyRequestWrapper(requestId,(HttpServletRequest) request);
 
-		long requestId = id.incrementAndGet();
-		request = new RequestWrapper(requestId, req);
 		try {
-			chain.doFilter(request, response);
+			chain.doFilter(myRequestWrapper, response);
 		} finally {
-			logRequest(req);
+			logRequest(myRequestWrapper);
 		}
 
 	}
@@ -54,33 +54,61 @@ public class RequestFilterLogging implements Filter {
 
 	}
 
-	public static class RequestWrapper extends HttpServletRequestWrapper {
-
-		private final ByteArrayOutputStream bos = new ByteArrayOutputStream();
+	public class MyRequestWrapper extends HttpServletRequestWrapper {
+		private final String body;
 		private long id;
-
-		public RequestWrapper(Long requestId, HttpServletRequest request) {
+		
+		public MyRequestWrapper(Long requestId,HttpServletRequest request) throws IOException {
 			super(request);
 			this.id = requestId;
+			StringBuilder stringBuilder = new StringBuilder();
+			BufferedReader bufferedReader = null;
+			try {
+				InputStream inputStream = request.getInputStream();
+				if (inputStream != null) {
+					bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+					char[] charBuffer = new char[128];
+					int bytesRead = -1;
+					while ((bytesRead = bufferedReader.read(charBuffer)) > 0) {
+						stringBuilder.append(charBuffer, 0, bytesRead);
+					}
+				} else {
+					stringBuilder.append("");
+				}
+			} catch (IOException ex) {
+				throw ex;
+			} finally {
+				if (bufferedReader != null) {
+					try {
+						bufferedReader.close();
+					} catch (IOException ex) {
+						throw ex;
+					}
+				}
+			}
+			body = stringBuilder.toString();
 		}
 
 		@Override
 		public ServletInputStream getInputStream() throws IOException {
-			return new ServletInputStream() {
-
-				private TeeInputStream tee = new TeeInputStream(RequestWrapper.super.getInputStream(), bos);
-
-				@Override
+			final ByteArrayInputStream byteArrayInputStream = new ByteArrayInputStream(body.getBytes());
+			ServletInputStream servletInputStream = new ServletInputStream() {
 				public int read() throws IOException {
-					return tee.read();
+					return byteArrayInputStream.read();
 				}
 			};
+			return servletInputStream;
 		}
 
-		public byte[] toByteArray() {
-			return bos.toByteArray();
+		@Override
+		public BufferedReader getReader() throws IOException {
+			return new BufferedReader(new InputStreamReader(this.getInputStream()));
 		}
 
+		public String getBody() {
+			return this.body;
+		}
+		
 		public long getId() {
 			return id;
 		}
@@ -90,12 +118,17 @@ public class RequestFilterLogging implements Filter {
 		}
 	}
 
-
-	private void logRequest(final HttpServletRequest request) {
+	private void logRequest(final MyRequestWrapper request) {
 		StringBuilder msg = new StringBuilder();
+		String client = SecurityUtil.getClientIpAddr(request);
+		String body = request.getBody();
+		int clientPort = request.getRemotePort();
 		msg.append(REQUEST_PREFIX);
-		if (request instanceof RequestWrapper) {
-			msg.append("request id=").append(((RequestWrapper) request).getId()).append("; ");
+		if (request instanceof MyRequestWrapper) {
+			msg.append("request id=").append(((MyRequestWrapper) request).getId()).append("; ");
+		}
+		if (body != null) {
+			msg.append("body=").append(body).append("; ");
 		}
 		HttpSession session = request.getSession(false);
 		if (session != null) {
@@ -104,9 +137,12 @@ public class RequestFilterLogging implements Filter {
 		if (request.getMethod() != null) {
 			msg.append("method=").append(request.getMethod()).append("; ");
 		}
-		if (request.getRemoteAddr() != null) {
-			msg.append("remote=").append(request.getRemoteAddr()).append("; ");
+		if (client != null) {
+			msg.append("remote=").append(client).append("; ");
 		}
+
+		msg.append("remote port=").append(clientPort).append("; ");
+
 		if (request.getContentType() != null) {
 			msg.append("content type=").append(request.getContentType()).append("; ");
 		}
@@ -114,29 +150,8 @@ public class RequestFilterLogging implements Filter {
 		if (request.getQueryString() != null) {
 			msg.append('?').append(request.getQueryString());
 		}
-
-		if (request instanceof RequestWrapper && !isMultipart(request) && !isBinaryContent(request)) {
-			RequestWrapper requestWrapper = (RequestWrapper) request;
-			try {
-				String charEncoding = requestWrapper.getCharacterEncoding() != null
-						? requestWrapper.getCharacterEncoding() : "UTF-8";
-				msg.append("; payload=").append(new String(requestWrapper.toByteArray(), charEncoding));
-			} catch (UnsupportedEncodingException e) {
-			}
-
-		}
 		logger.debug(msg.toString());
 	}
 
-	private boolean isBinaryContent(final HttpServletRequest request) {
-		if (request.getContentType() == null) {
-			return false;
-		}
-		return request.getContentType().startsWith("image") || request.getContentType().startsWith("video")
-				|| request.getContentType().startsWith("audio");
-	}
-
-	private boolean isMultipart(final HttpServletRequest request) {
-		return request.getContentType() != null && request.getContentType().startsWith("multipart/form-data");
-	}
+	
 }

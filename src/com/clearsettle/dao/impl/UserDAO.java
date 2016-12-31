@@ -1,5 +1,6 @@
 package com.clearsettle.dao.impl;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
@@ -49,15 +50,11 @@ public class UserDAO implements IUserDAO {
 
 	@Override
 	public ReportResponse report(Report report) {
-		
-		System.out.println(report.getFromDate());
-		System.out.println(report.getToDate());
-		
+			
 		ReportResponse response = new ReportResponse();
 		response.setCount(283);
 		response.setTotal(28300);
 		response.setCurrency("USD");
-		
 		
 		return response;
 	}
@@ -67,12 +64,15 @@ public class UserDAO implements IUserDAO {
 		 ClientResponse response = new ClientResponse();
 		 CustomerInfo custInfo = new CustomerInfo();
 		 Calendar cal = Calendar.getInstance();
-		 cal.setTimeInMillis(0);
-		 cal.set(2015, 10, 9, 12, 9, 10);
+		 cal.set(2015, 9, 9, 12, 9, 10);
 		 Date created = cal.getTime(); 
-		 
-		 custInfo.setCreated_at(created);
-		 custInfo.setUpdated_at(created);
+		 SimpleDateFormat dt = new SimpleDateFormat("yyyy-MM-dd  hh:mm:ss");
+		 cal.set(1986, 2, 20, 12, 9, 10);
+		 Date birthDay =cal.getTime();
+	      
+		 custInfo.setId(1);
+		 custInfo.setCreated_at(dt.format(created));
+		 custInfo.setUpdated_at(dt.format(created));
 		 custInfo.setDeleted_at(null);
 		 custInfo.setNumber("401288XXXXXX188");
 		 custInfo.setExpiryMonth("6");
@@ -81,7 +81,7 @@ public class UserDAO implements IUserDAO {
 		 custInfo.setStartYear(null);
 		 custInfo.setIssueNumber(null);
 		 custInfo.setEmail("michael@gmail.com");
-		 custInfo.setBirthday("1986-03-20 12:09:1");
+		 custInfo.setBirthday(dt.format(birthDay));
 		 custInfo.setGender(null);
 		 custInfo.setBillingTitle("");
 		 custInfo.setBillingFirstName("Michael");
