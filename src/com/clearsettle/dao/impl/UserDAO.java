@@ -6,8 +6,6 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
-import org.springframework.stereotype.Service;
-
 import com.clearsettle.domain.CustomerInfo;
 import com.clearsettle.domain.Merchant;
 import com.clearsettle.domain.Report;
@@ -19,7 +17,7 @@ import com.clearsettle.response.domain.ClientResponse;
 import com.clearsettle.response.domain.MerchantResponse;
 import com.clearsettle.response.domain.ReportResponse;
 
-@Service("ml")
+
 public class UserDAO implements IUserDAO {
 
 	//FOR DBConnections

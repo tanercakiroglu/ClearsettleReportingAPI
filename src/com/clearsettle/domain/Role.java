@@ -4,7 +4,7 @@ import org.springframework.security.core.GrantedAuthority;
 
 /**
  * 
- * @author taner çakýroðlu
+ * @author taner cakiroglu
  * @comment simple pojo
  */
 

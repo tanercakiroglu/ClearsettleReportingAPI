@@ -9,9 +9,10 @@ import com.clearsettle.util.*;
 
 /**
  * 
- * @author taner çakýroðlu
+ * @author taner cakiroglu
  *
  */
+
 
 @Aspect
 public class ExceptionInterceptor {

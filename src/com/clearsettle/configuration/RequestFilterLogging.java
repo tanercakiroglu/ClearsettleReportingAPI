@@ -23,7 +23,7 @@ import org.slf4j.LoggerFactory;
 
 /**
  * 
- * @author taner çakýroðlu
+ * @author taner ï¿½akï¿½roï¿½lu
  * @comment filter and log every request
  *
  */
@@ -63,7 +63,7 @@ public class RequestFilterLogging implements Filter {
 
 	/**
 	 * 
-	 * @author taner çakýroðlu 
+	 * @author taner cakiroglu
 	 * @comment wrap the request to be able read request more than one time 
 	 */
 	public class MyRequestWrapper extends HttpServletRequestWrapper {

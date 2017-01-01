@@ -6,9 +6,10 @@ import org.springframework.stereotype.Component;
 
 /**
  * 
- * @author taner çakýroðlu
+ * @author taner cakiroglu
  *
  */
+
 @Aspect
 @Component
 public class ExceptionManager {

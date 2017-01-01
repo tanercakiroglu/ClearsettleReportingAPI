@@ -8,6 +8,12 @@ import com.clearsettle.response.domain.ClientResponse;
 import com.clearsettle.response.domain.MerchantResponse;
 import com.clearsettle.response.domain.ReportResponse;
 
+/**
+ * 
+ * @author taner cakiroglu
+ *
+ */
+
 public interface IUserService {
 
 	/**

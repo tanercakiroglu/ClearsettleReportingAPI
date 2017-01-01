@@ -6,7 +6,7 @@ import com.google.gson.GsonBuilder;
 
 /**
  * 
- * @author taner çakýroðlu
+ * @author taner cakiroglu
  * @comment project util
  */
 

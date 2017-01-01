@@ -18,7 +18,7 @@ import com.nimbusds.jwt.JWTParser;
 
 /**
  * 
- * @author taner çakýroðlu
+ * @author taner cakiroglu
  * @comment filter /api/** url 
  */
 public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter {

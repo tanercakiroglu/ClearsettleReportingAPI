@@ -19,6 +19,11 @@ import com.clearsettle.idao.IUserDAO;
 import com.clearsettle.iservice.IUserService;
 import com.clearsettle.response.domain.CheckCredentialResponse;
 import com.clearsettle.response.domain.MerchantResponse;
+/**
+ * 
+ * @author taner cakiroglu
+ *
+ */
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration()

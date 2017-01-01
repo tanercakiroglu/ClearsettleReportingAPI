@@ -14,7 +14,7 @@ import com.nimbusds.jwt.ReadOnlyJWTClaimsSet;
 
 /**
  * 
- * @author taner çakýroðlu
+ * @author taner cakiroglu
  * @comment wrap the auth.
  *
  */

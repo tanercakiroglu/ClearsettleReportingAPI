@@ -1,7 +1,7 @@
 package com.clearsettle.domain;
 /**
  * 
- * @author taner çakýroðlu
+ * @author taner cakiroglu
  * @comment simple pojo
  */
 

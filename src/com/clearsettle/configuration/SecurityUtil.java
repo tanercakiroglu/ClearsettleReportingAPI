@@ -11,7 +11,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 /**
  * 
- * @author  taner çakýroðlu
+ * @author  taner cakiroglu
  *
  */
 

@@ -4,7 +4,7 @@ import java.util.Date;
 
 /**
  * 
- * @author taner çakýroðlu
+ * @author taner cakiroglu
  * @comment simple pojo
  */
 

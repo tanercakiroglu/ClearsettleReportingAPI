@@ -12,12 +12,13 @@ import com.clearsettle.domain.User;
 import com.clearsettle.exception.BussinesException;
 import com.clearsettle.icontroller.IUserController;
 import com.clearsettle.iservice.IUserService;
+import com.clearsettle.response.domain.CheckCredentialResponse;
 import com.clearsettle.util.Constants;
 import com.clearsettle.util.Util;
 
 /**
  * 
- * @author taner çakýroðlu
+ * @author taner cakiroglu
  *
  */
 
@@ -34,8 +35,11 @@ public class UserController implements IUserController {
 		if (credential == null || Util.isNullOREmpty(credential.getEmail())
 				|| Util.isNullOREmpty(credential.getPassword()))
 			throw new BussinesException(Constants.INVALID_PARAMETERS);
-
-		return Util.constructJSON(Constants.APPROVED, true, userService.checkCredential(credential));
+        CheckCredentialResponse response=userService.checkCredential(credential);
+        if(response==null)
+        	throw new BussinesException(Constants.CREDENTIAL_NOT_VALID);
+        
+		return Util.constructJSON(Constants.APPROVED, true,response );
 	}
 
 	@HandleException

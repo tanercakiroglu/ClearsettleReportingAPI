@@ -2,7 +2,7 @@ package com.clearsettle.util;
 
 /**
  * 
- * @author taner çakýroðlu
+ * @author taner cakiroglu
  * @comment project contants
  */
 

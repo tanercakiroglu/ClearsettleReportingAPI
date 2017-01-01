@@ -2,7 +2,7 @@ package com.clearsettle.exception;
 
 /**
  * 
- * @author taner çakýroðlu
+ * @author taner cakiroglu
  * @comment catch bussines logic exception
  *
  */
