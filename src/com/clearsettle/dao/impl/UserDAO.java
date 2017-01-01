@@ -77,36 +77,21 @@ public class UserDAO implements IUserDAO {
 		 custInfo.setNumber("401288XXXXXX188");
 		 custInfo.setExpiryMonth("6");
 		 custInfo.setExpiryYear("2017");
-		 custInfo.setStartMonth(null);
-		 custInfo.setStartYear(null);
-		 custInfo.setIssueNumber(null);
 		 custInfo.setEmail("michael@gmail.com");
 		 custInfo.setBirthday(dt.format(birthDay));
-		 custInfo.setGender(null);
 		 custInfo.setBillingTitle("");
 		 custInfo.setBillingFirstName("Michael");
 		 custInfo.setBillingLastName ("KaracustInfo");
-		 custInfo.setBillingCompany (null);
 		 custInfo.setBillingAddress1 ("test address");
-		 custInfo.setBillingAddress2 (null);
 		 custInfo.setBillingCity ("Antalya");
 		 custInfo.setBillingPostcode ("07070");
-		 custInfo.setBillingState (null);
 		 custInfo.setBillingCountry ("TR");
-		 custInfo.setBillingPhone (null);
-		 custInfo.setBillingFax (null);
-		 custInfo.setShippingTitle (null);
 		 custInfo.setShippingFirstName ("Michael");
 		 custInfo.setShippingLastName ("Kara");
-		 custInfo.setShippingCompany (null);
 		 custInfo.setShippingAddress1 ("test address");
-		 custInfo.setShippingAddress2 (null);
 		 custInfo.setShippingCity ("Antalya");
 		 custInfo.setShippingPostcode ("07070");
-		 custInfo.setShippingState (null);
 		 custInfo.setShippingCountry ("TR");
-		 custInfo.setShippingPhone (null);
-		 custInfo.setShippingFax (null);
 		 
 		 response.setCustomerInfo(custInfo);
 		 

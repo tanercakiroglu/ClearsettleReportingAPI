@@ -46,7 +46,7 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
 	                JWT jwt = JWTParser.parse(stringToken);
 	                JWTToken token = new JWTToken(jwt);
 	                authResult = this.getAuthenticationManager().authenticate(token);
-	                response.addHeader("Authorization",stringToken);
+	                response.addHeader("Authorization","Bearer " +stringToken);
 	                SecurityContextHolder.getContext().setAuthentication(authResult);
 	            } catch (ParseException e) {
 	                throw new BadCredentialsException("Invalid token");
