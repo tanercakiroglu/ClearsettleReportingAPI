@@ -63,6 +63,8 @@ public class UserController implements IUserController {
 		return Util.constructJSON(Constants.APPROVED, true, userService.client(transaction));
 	}
 
+	@HandleException
+	@Loggable
 	@Override
 	public String merchant(@RequestBody Transaction transaction) throws BussinesException {
 		if (transaction == null || Util.isNullOREmpty(transaction.getTransactionId()))
