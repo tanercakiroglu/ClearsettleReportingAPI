@@ -15,6 +15,12 @@ import com.clearsettle.iservice.IUserService;
 import com.clearsettle.util.Constants;
 import com.clearsettle.util.Util;
 
+/**
+ * 
+ * @author taner çakýroðlu
+ *
+ */
+
 @RestController
 public class UserController implements IUserController {
 

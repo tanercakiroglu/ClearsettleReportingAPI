@@ -1,6 +1,12 @@
 package com.clearsettle.response.domain;
 
-public class CheckCredentialResponse  extends BaseResponse{
+/**
+ * 
+ * @author taner çakýroðlu
+ * @comment simple pojo
+ */
+
+public class CheckCredentialResponse extends BaseResponse {
 
 	private String token;
 
@@ -16,7 +22,5 @@ public class CheckCredentialResponse  extends BaseResponse{
 	public void setToken(String token) {
 		this.token = token;
 	}
-	
-
 
 }

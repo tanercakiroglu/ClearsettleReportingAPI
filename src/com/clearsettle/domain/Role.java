@@ -2,6 +2,12 @@ package com.clearsettle.domain;
 
 import org.springframework.security.core.GrantedAuthority;
 
+/**
+ * 
+ * @author taner çakýroðlu
+ * @comment simple pojo
+ */
+
 public class Role implements GrantedAuthority {
 
     /**

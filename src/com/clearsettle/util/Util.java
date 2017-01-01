@@ -4,6 +4,12 @@ import com.clearsettle.response.domain.ErrorResponse;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+/**
+ * 
+ * @author taner çakýroðlu
+ * @comment project util
+ */
+
 public class Util {
 
 	/**

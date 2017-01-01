@@ -1,5 +1,10 @@
 package com.clearsettle.domain;
 
+/**
+ * 
+ * @author taner çakýroðlu
+ * @comment simple pojo
+ */
 public class CustomerInfo {
 
 	

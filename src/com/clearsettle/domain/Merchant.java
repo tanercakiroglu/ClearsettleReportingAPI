@@ -1,5 +1,11 @@
 package com.clearsettle.domain;
 
+/**
+ * 
+ * @author taner çakýroðlu
+ * @comment simple pojo
+ */
+
 public class Merchant {
 	private int id;
 	private String parentId;

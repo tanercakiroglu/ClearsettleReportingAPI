@@ -9,11 +9,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.util.StopWatch;
 
+/**
+ * 
+ * @author taner çakýroðlu
+ *
+ */
+
 @Aspect
 public class LogInterceptor {
 
 	 private final static Logger logger = LoggerFactory.getLogger(LogInterceptor.class);
 
+	 /**
+	  * @comment before controller method try to logg
+	  * @param jp
+	  * @param bean
+	  * @param logme
+	  */
 	@Before(value = "com.clearsettle.aspect.logger.LogManager.auditLog()" + "&& target(bean) "
 			+ "&& @annotation(com.clearsettle.aspect.logger.Loggable)" + "&& @annotation(logme)", argNames = "bean,logme")
 	public void auditLog(JoinPoint jp, Object bean, Loggable logme) {
@@ -23,7 +35,15 @@ public class LogInterceptor {
 		logger.debug(String.format("Method Called: %s", jp.getSignature().getName()));
 
 	}
-
+   /**
+    * 
+    * @param joinPoint
+    * @param bean
+    * @param logme
+    * @return object
+    * @comment calculate method performance
+    * @throws Throwable
+    */
 	@Around(value = "com.clearsettle.aspect.logger.LogManager.performanceLog()" + "&& target(bean) "
 			+ "&& @annotation(com.clearsettle.aspect.logger.Loggable)" + "&& @annotation(logme)", argNames = "bean,logme")
 	public Object performanceLog(ProceedingJoinPoint joinPoint, Object bean,Loggable logme) throws Throwable {

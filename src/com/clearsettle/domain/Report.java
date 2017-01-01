@@ -2,6 +2,12 @@ package com.clearsettle.domain;
 
 import java.util.Date;
 
+/**
+ * 
+ * @author taner çakýroðlu
+ * @comment simple pojo
+ */
+
 public class Report {
 
 	private Date fromDate;

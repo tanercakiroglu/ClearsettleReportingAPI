@@ -1,5 +1,11 @@
 package com.clearsettle.response.domain;
 
+/**
+ * 
+ * @author taner çakýroðlu
+ * @comment base response 
+ */
+
 public abstract class BaseResponse {
 
 	private String status;

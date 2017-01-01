@@ -1,5 +1,11 @@
 package com.clearsettle.response.domain;
 
+/**
+ * 
+ * @author taner çakýroðlu
+ * @comment simple pojo
+ */
+
 import com.clearsettle.domain.CustomerInfo;
 
 public class ClientResponse extends BaseResponse {

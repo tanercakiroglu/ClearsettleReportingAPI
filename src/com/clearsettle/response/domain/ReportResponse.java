@@ -1,5 +1,11 @@
 package com.clearsettle.response.domain;
 
+/**
+ * 
+ * @author taner çakýroðlu
+ * @comment simple pojo
+ */
+
 public class ReportResponse extends BaseResponse {
 
 	 private int count ;

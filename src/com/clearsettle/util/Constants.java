@@ -1,5 +1,11 @@
 package com.clearsettle.util;
 
+/**
+ * 
+ * @author taner çakýroðlu
+ * @comment project contants
+ */
+
 public class Constants {
 
 	

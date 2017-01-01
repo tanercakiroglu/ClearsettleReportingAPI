@@ -1,7 +1,4 @@
 package com.clearsettle.configuration;
-
-
-
 import java.text.ParseException;
 import java.util.ArrayList;
 import java.util.Collection;
@@ -14,6 +11,13 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
 import com.nimbusds.jwt.JWT;
 import com.nimbusds.jwt.ReadOnlyJWTClaimsSet;
+
+/**
+ * 
+ * @author taner çakýroðlu
+ * @comment wrap the auth.
+ *
+ */
 
 public class JWTToken implements Authentication {
 

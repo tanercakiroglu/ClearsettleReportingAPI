@@ -16,6 +16,11 @@ import org.springframework.security.web.authentication.AbstractAuthenticationPro
 import com.nimbusds.jwt.JWT;
 import com.nimbusds.jwt.JWTParser;
 
+/**
+ * 
+ * @author taner çakýroðlu
+ * @comment filter /api/** url 
+ */
 public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter {
 	
 	private static final String INTERCEPTOR_PROCESS_URL = "/**";
@@ -25,7 +30,9 @@ public class AuthenticationFilter extends AbstractAuthenticationProcessingFilter
 		super(INTERCEPTOR_PROCESS_URL);
 	}
 
-	
+	/**
+	 * check jwt token 
+	 */
 	@Override
 	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response)
 			throws AuthenticationException, IOException, ServletException {

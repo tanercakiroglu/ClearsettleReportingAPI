@@ -1,5 +1,11 @@
 package com.clearsettle.exception;
 
+/**
+ * 
+ * @author taner çakýroðlu
+ * @comment catch bussines logic exception
+ *
+ */
 public class BussinesException extends Exception {
 
 	/**

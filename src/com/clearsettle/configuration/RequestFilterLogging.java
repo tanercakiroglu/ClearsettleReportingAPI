@@ -21,6 +21,13 @@ import javax.servlet.http.HttpSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+/**
+ * 
+ * @author taner çakýroðlu
+ * @comment filter and log every request
+ *
+ */
+
 public class RequestFilterLogging implements Filter {
 
 	private AtomicLong atomicId = new AtomicLong(1);
@@ -54,6 +61,11 @@ public class RequestFilterLogging implements Filter {
 
 	}
 
+	/**
+	 * 
+	 * @author taner çakýroðlu 
+	 * @comment wrap the request to be able read request more than one time 
+	 */
 	public class MyRequestWrapper extends HttpServletRequestWrapper {
 		private final String body;
 		private long id;
@@ -117,7 +129,10 @@ public class RequestFilterLogging implements Filter {
 			this.id = id;
 		}
 	}
-
+    /**
+     * log the request
+     * @param request
+     */
 	private void logRequest(final MyRequestWrapper request) {
 		StringBuilder msg = new StringBuilder();
 		String client = SecurityUtil.getClientIpAddr(request);
